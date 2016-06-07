@@ -23,119 +23,34 @@
 <link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 <link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-<title>添加产品</title>
+<title>添加产品详情</title>
 
 </head>
 <body>
 <article class="page-container">
   <form class="form form-horizontal"  name='submit_form' id='submit_form' onsubmit="return false">
 
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">产品id：</label>
+    <div class="row cl" style="display:none">
+      <label class="form-label col-xs-4 col-sm-2">id：</label>
       <div class="formControls col-xs-8 col-sm-9">
         <input type="text" class="input-text" value="0" placeholder="" id="id" name="id">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">名称：</label>
+      <label class="form-label col-xs-4 col-sm-2">信息：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="name" name="name">
+        <input type="text" class="input-text" value="0" placeholder="" id="information" name="information">
       </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">编号：</label>
+    <div class="row cl" style="display:none">
+      <label class="form-label col-xs-4 col-sm-2">产品id：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productNo" name="productNo">
+        <input type="text" class="input-text" value="0" placeholder="" id="productId" name="productId">
       </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">概述：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="summary" name="summary">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">商家名称：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="corpName" name="corpName">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">商家ID：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="corpId" name="corpId">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 定价：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="price" name="price">
-      </div>
-    </div>
-   <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 销售价格：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="sellPrice" name="sellPrice">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 其他信息：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="otherInfo" name="otherInfo">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 预售：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagPresell" name="tagPresell">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 促销：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagPromotion" name="tagPromotion">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 新品：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagNew" name="tagNew">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 产品标签：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagInfo" name="tagInfo">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 销售数量：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="countSale" name="countSale">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 收藏数量：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="countWish" name="countWish">
-      </div>
-    </div>
-      <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 点赞数量：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="countLike" name="countLike">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 星级别：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="star" name="star">
-      </div>
-    </div>
-
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-        <button onClick="addProduct();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+        <button onClick="addProductInfo();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
         <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
         <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
@@ -163,24 +78,28 @@
 
 <script>
 
-    function initProduct(){
-       var id = getParameterByName("id");
+    function initProductInfo(){
+       
+       var id = GetQueryString("id");
+       alert(id);
        if(id!=null){
-          var data = getJSON2('/fs-server/product/getProductById',{'id':id});
+           alert(id);
+          var data = getJSON2('/fs-server/productInfo/getProductInfoById',{'id':id});
+          console.log(data);
           if(data!=null)
+            console.log(data);
             $('#id').val(data.id);
-            $('#name').val(data.name);
-            $('#productNo').val(data.productNo);
+            $('#information').val(data.information);
+            $('#productId').val(data.productId);
        }
 
     }
-    function addProduct(){
+    function addProductInfo(){
 
         var parameters = getSubmitItems("submit_form");
-   
-        $.ajax( {
+          $.ajax( {
           type : "post",
-          url : '/fs-server/product/addOrUpdateProduct',
+          url : '/fs-server/productInfo/addOrUpdateProductInfo',
           cache : false,
           async : false,//同步
           contentType: 'application/json',
@@ -201,12 +120,6 @@
     var validataRule ={
         name:{
             required: true
-        },
-        productNo:{
-          required:true
-        },
-        tagInfo:{
-          required:true
         }
     };
     var validataMessage = {
@@ -219,12 +132,12 @@
     };
 
     jQuery(document).ready(function () {
-
-        initProduct();
+alert(2);
+        initProductInfo();
 
         $.validator.setDefaults({
             submitHandler: function() {
-                addProduct();
+                addProductInfo();
             }
         });
        // $("#submit_form").validate();

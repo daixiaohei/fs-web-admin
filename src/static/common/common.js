@@ -33,7 +33,8 @@ function isSessionTimeOut(){
  */
 function getSubmitItems(Container_id){
     var data ={};
-    var elements = jQuery("input,select,textarea",$("#"+Container_id));
+   // var elements = jQuery("input,select,textarea",$("#"+Container_id));
+   var elements = jQuery("input,select,textarea",document.forms[0]);
     for(var i=0; i < elements.length;i++){
         var isok = false;
         //input 类型
@@ -745,3 +746,14 @@ function GetQueryString(name)
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
 }
+function getParameterByName(name)  
+{  
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");  
+  var regexS = "[\\?&]" + name + "=([^&#]*)";  
+  var regex = new RegExp(regexS);  
+  var results = regex.exec(window.location.search);  
+  if(results == null)  
+    return "";  
+  else  
+    return decodeURIComponent(results[1].replace(/\+/g, " "));  
+} 

@@ -31,111 +31,89 @@
   <form class="form form-horizontal"  name='submit_form' id='submit_form' onsubmit="return false">
 
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">产品id：</label>
+      <label class="form-label col-xs-4 col-sm-2">订单id：</label>
       <div class="formControls col-xs-8 col-sm-9">
         <input type="text" class="input-text" value="0" placeholder="" id="id" name="id">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">名称：</label>
+      <label class="form-label col-xs-4 col-sm-2">订单编号：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="name" name="name">
+        <input type="text" class="input-text" value="0" placeholder="" id="orderNo" name="orderNo">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">编号：</label>
+      <label class="form-label col-xs-4 col-sm-2">订单金额：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productNo" name="productNo">
+        <input type="text" class="input-text" value="0" placeholder="" id="amount" name="amount">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">概述：</label>
+      <label class="form-label col-xs-4 col-sm-2">支付类型：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="summary" name="summary">
+        <input type="text" class="input-text" value="0" placeholder="" id="payType" name="payType">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">商家名称：</label>
+      <label class="form-label col-xs-4 col-sm-2">支付状态：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="corpName" name="corpName">
+        <input type="text" class="input-text" value="0" placeholder="" id="status" name="status">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">商家ID：</label>
+      <label class="form-label col-xs-4 col-sm-2">优惠券码：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="corpId" name="corpId">
+        <input type="text" class="input-text" value="0" placeholder="" id="couponNo" name="couponNo">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 定价：</label>
+      <label class="form-label col-xs-4 col-sm-2"> 优惠券金额：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="price" name="price">
+        <input type="text" class="input-text" value="0" placeholder="" id="couponAmount" name="couponAmount">
       </div>
     </div>
    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 销售价格：</label>
+      <label class="form-label col-xs-4 col-sm-2"> 支付价格：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="sellPrice" name="sellPrice">
+        <input type="text" class="input-text" value="0" placeholder="" id="payAmount" name="payAmount">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 其他信息：</label>
+      <label class="form-label col-xs-4 col-sm-2"> 配送价格：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="otherInfo" name="otherInfo">
+        <input type="text" class="input-text" value="0" placeholder="" id="dispatchCost" name="dispatchCost">
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 预售：</label>
+      <label class="form-label col-xs-4 col-sm-2"> 下单类型：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagPresell" name="tagPresell">
+        <input type="text" class="input-text" value="0" placeholder="" id="orderType" name="orderType">
       </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 促销：</label>
+  <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"> 配送类型：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagPromotion" name="tagPromotion">
+        <input type="text" class="input-text" value="0" placeholder="" id="dispatchType" name="dispatchType">
+      </div>
+    </div> <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"> 配送地址：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" class="input-text" value="0" placeholder="" id="dispatchAddr" name="dispatchAddr">
+      </div>
+    </div> <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"> 联系人：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" class="input-text" value="0" placeholder="" id="contactUserName" name="contactUserName">
+      </div>
+    </div> <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"> 联系电话：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" class="input-text" value="0" placeholder="" id="contractTel" name="contractTel">
       </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 新品：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagNew" name="tagNew">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 产品标签：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="tagInfo" name="tagInfo">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 销售数量：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="countSale" name="countSale">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 收藏数量：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="countWish" name="countWish">
-      </div>
-    </div>
-      <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 点赞数量：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="countLike" name="countLike">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 星级别：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="star" name="star">
-      </div>
-    </div>
-
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-        <button onClick="addProduct();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+        <button onClick="addOrders();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
         <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
         <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
@@ -163,24 +141,30 @@
 
 <script>
 
-    function initProduct(){
-       var id = getParameterByName("id");
+   function initOrders(){
+       
+       var id = GetQueryString("id");
+       
+       alert(id);
        if(id!=null){
-          var data = getJSON2('/fs-server/product/getProductById',{'id':id});
+
+          var data = getJSON2('/fs-server/orders/getOrdersById',{'id':id});
           if(data!=null)
             $('#id').val(data.id);
-            $('#name').val(data.name);
-            $('#productNo').val(data.productNo);
+            $('#orderNo').val(data.orderNo);
+            $('#amount').val(data.amount);
        }
 
     }
-    function addProduct(){
+    function addOrders(){
 
         var parameters = getSubmitItems("submit_form");
-   
+
+
+ 
         $.ajax( {
           type : "post",
-          url : '/fs-server/product/addOrUpdateProduct',
+          url : '/fs-server/orders/addOrUpdateOrders',
           cache : false,
           async : false,//同步
           contentType: 'application/json',
@@ -197,22 +181,17 @@
           }
        });
 
+
     }
     var validataRule ={
         name:{
             required: true
-        },
-        productNo:{
-          required:true
-        },
-        tagInfo:{
-          required:true
         }
     };
     var validataMessage = {
 
         name:{
-            required: "产品名称必填！"
+            required: "名称必填！"
         }
 
 
@@ -220,11 +199,11 @@
 
     jQuery(document).ready(function () {
 
-        initProduct();
+        initOrders();
 
         $.validator.setDefaults({
             submitHandler: function() {
-                addProduct();
+                addOrders();
             }
         });
        // $("#submit_form").validate();
@@ -241,6 +220,7 @@
         });
 
     });
+
 
 </script>
 </body>

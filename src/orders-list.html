@@ -23,17 +23,17 @@
 <!--[if IE 7]>
 <link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
 <![endif]-->
-<title>产品管理</title>
+<title>订单管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
   <div class="text-c"> 名称：
     <input type="text" class="input-text" style="width:250px" placeholder="名称" id="name" name="searchName"><button type="button" 
     onclick="doSearch()" class="btn btn-success" id="name" name=""><i class="icon-search"  ></i> 搜索</button>
 
   </div>
-  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加产品" _href="product-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span></div>
+  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加订单" _href="orders-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单</a></span></div>
 
   <div id="Search_Result"></div>
   <div id="pageNav" class="pageNav"></div>
@@ -54,11 +54,11 @@
 
 <script type="text/javascript">
  /*----------产品管理------------------*/
-function product_add(w,h,title,url){
+function orders_add(w,h,title,url){
   layer_show(w,h,title,url);
 }
 
-function product_edit(title,url,id){
+function orders_edit(title,url,id){
   var index = layer.open({
     type: 2,
     title: title,
@@ -66,13 +66,13 @@ function product_edit(title,url,id){
   });
   layer.full(index);
 }
-function product_del(obj,id){
+function orders_del(obj,id){
 
  
    layer.confirm('确认要删除吗？',function(index){
 
         if(index==1){
-          var result = getJSON('/fs-server/product/del',{'id':id});
+          var result = getJSON('/fs-server/orders/del',{'id':id});
           if(result.success='true'){
         $(obj).parents("tr").remove();
         layer.msg('已删除!',1);
@@ -95,16 +95,23 @@ function product_del(obj,id){
         var vals_str = $.param(requestJson);
         
         //初始化表格表格title和对应的值名称
-        var titleAndcolumns=[
-            {'title':'ID','column':'id','width':'9%'},
-            {'title':'名称','column':'name','width':'9%'},
-            {'title':'产品编号','column':'productNo','width':'5%'},
-            {'title':'产品概要','column':'summary','width':'10%'},
-            {'title':'所属商家','column':'corpName','width':'15%'},
-            {'title':'定价','column':'price','width':'15%'},
-            {'title':'所属商家','column':'corpName','width':'15%'},
-            {'title':'星级别','column':'star','width':'15%'},
-            {'title':'操作','column':'star','width':'20%'},
+             var titleAndcolumns=[
+           /* {'title':'ID','column':'id','width':'9%'},*/
+            {'title':'订单编号','column':'orderNo','width':'9%'},
+            {'title':'支付类型','column':'payType','width':'5%'},
+            {'title':'订单状态','column':'status','width':'5%'},
+         /*   {'title':'优惠券码','column':'couponNo','width':'4%'},*/
+            {'title':'优惠券金额','column':'couponAmount','width':'5%'},
+            {'title':'支付金额','column':'payAmount','width':'5%'},
+            {'title':'配送价格','column':'dispatchCost','width':'5%'},
+           /* {'title':'订单类型','column':'orderType','width':'4%'},*/
+        /*    {'title':'预配送时间','column':'dispatchStart','width':'6%'},*/
+         /*   {'title':'预配送结束时间','column':'dispatchEnd','width':'6%'},*/
+          /*  {'title':'配送类型','column':'dispatchType','width':'4%'},*/
+            {'title':'配送地址','column':'dispatchAddr','width':'10%'},
+            {'title':'联系人','column':'contactUserName','width':'5%'},
+            {'title':'联系人电话','column':'contractTel','width':'6%'},
+            {'title':'操作','column':'id','width':'15%'}
            
            ];
 
@@ -115,20 +122,20 @@ function product_del(obj,id){
 
 
         var html = '<td class="td-manage">'+
-             '<a title="编辑" href="javascript:;" onclick="product_edit(\'产品编辑\',\'product-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
+             '<a title="编辑" href="javascript:;" onclick="orders_edit(\'订单编辑\',\'orders-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6df;</i>'+
              '</a>'+
-             '<a title="删除" href="javascript:;" onclick="product_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
+             '<a title="删除" href="javascript:;" onclick="orders_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6e2;</i>'+
              '</a>'+
              '</td>'
-        $('td:eq(8)', nRow).html(html);
+        $('td:eq(9)', nRow).html(html);
         return nRow;
     };
 
  
 
-         tableObj = new  initTableDateOnServer('Search_Result',"table1",titleAndcolumns,'/fs-server/product/getProductByPage',vals_str,fnRowCallback,null,null,true,false);
+         tableObj = new  initTableDateOnServer('Search_Result',"table1",titleAndcolumns,'/fs-server/orders/getOrdersByPage',vals_str,fnRowCallback,null,null,true,false);
 
     }
 

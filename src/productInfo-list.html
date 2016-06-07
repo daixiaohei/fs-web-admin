@@ -33,7 +33,7 @@
     onclick="doSearch()" class="btn btn-success" id="name" name=""><i class="icon-search"  ></i> 搜索</button>
 
   </div>
-  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加产品" _href="product-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span></div>
+  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加产品详情" _href="productInfo-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品详情</a></span></div>
 
   <div id="Search_Result"></div>
   <div id="pageNav" class="pageNav"></div>
@@ -54,11 +54,11 @@
 
 <script type="text/javascript">
  /*----------产品管理------------------*/
-function product_add(w,h,title,url){
+function productInfo_add(w,h,title,url){
   layer_show(w,h,title,url);
 }
 
-function product_edit(title,url,id){
+function productInfo_edit(title,url,id){
   var index = layer.open({
     type: 2,
     title: title,
@@ -66,7 +66,7 @@ function product_edit(title,url,id){
   });
   layer.full(index);
 }
-function product_del(obj,id){
+function productInfo_del(obj,id){
 
  
    layer.confirm('确认要删除吗？',function(index){
@@ -91,45 +91,38 @@ function product_del(obj,id){
       
       
        var nameV = $('#name').val();
-       var requestJson = {'name':nameV};
+        var requestJson = {'name':nameV};
         var vals_str = $.param(requestJson);
         
         //初始化表格表格title和对应的值名称
         var titleAndcolumns=[
             {'title':'ID','column':'id','width':'9%'},
-            {'title':'名称','column':'name','width':'9%'},
-            {'title':'产品编号','column':'productNo','width':'5%'},
-            {'title':'产品概要','column':'summary','width':'10%'},
-            {'title':'所属商家','column':'corpName','width':'15%'},
-            {'title':'定价','column':'price','width':'15%'},
-            {'title':'所属商家','column':'corpName','width':'15%'},
-            {'title':'星级别','column':'star','width':'15%'},
-            {'title':'操作','column':'star','width':'20%'},
+            {'title':'产品id','column':'product.id','width':'9%'},
+            {'title':'信息','column':'information','width':'9%'},
+            {'title':'操作','column':'id','width':'15%'}
            
            ];
 
-    // 对某一行做特殊处理 iDisplayIndex 第几行
-    var fnRowCallback= function(nRow, aData, iDisplayIndex) {// 当创建了行，但还未绘制到屏幕上的时候调用
-  
-        var id = aData.id;
-
-
-        var html = '<td class="td-manage">'+
-             '<a title="编辑" href="javascript:;" onclick="product_edit(\'产品编辑\',\'product-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
+            // 对某一行做特殊处理 iDisplayIndex 第几行
+        var fnRowCallback= function(nRow, aData, iDisplayIndex) {// 当创建了行，但还未绘制到屏幕上的时候调用
+      
+            var id = aData.id;
+            var html = '<td class="td-manage">'+
+             '<a title="编辑" href="javascript:;" onclick="productInfo_edit(\'产品编辑\',\'productInfo-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6df;</i>'+
              '</a>'+
-             '<a title="删除" href="javascript:;" onclick="product_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
+             '<a title="删除" href="javascript:;" onclick="productInfo_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6e2;</i>'+
              '</a>'+
              '</td>'
-        $('td:eq(8)', nRow).html(html);
-        return nRow;
-    };
+           $('td:eq(3)', nRow).html(html);
+        };
 
- 
+       var fnDrawCallback = null;
 
-         tableObj = new  initTableDateOnServer('Search_Result',"table1",titleAndcolumns,'/fs-server/product/getProductByPage',vals_str,fnRowCallback,null,null,true,false);
+        tableObj = new  initTableDateOnServer('Search_Result',"table1",titleAndcolumns,'/fs-server/productInfo/getProductInfoByPage',vals_str,fnRowCallback,fnDrawCallback,null,true,false);
 
+        
     }
 
   window.onload = (function(){

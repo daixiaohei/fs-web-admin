@@ -11,19 +11,19 @@
  * @param withoutPageSize 是否显示分页条数，默认为显示，可为空
  * @param firstIsnotCheckbox 表头第一列不为checkbox,默认为checkbox，可为空
  */
-var initTableDateOnServer = function(resultId,tableId,titleAndcolumns,ajaxUrl,paramData,fnRowCallback,fnDrawCallback,isRadio,withoutPageSize,columnDefsParams) {
+var initTableDateOnServer = function(resultId,tableId,titleAndcolumns,ajaxUrl,paramData,fnRowCallback,fnDrawCallback,isRadio,withoutPageSize,firstIsnotCheckbox, columnDefsParams) {
     this.oTable;
     var columnsParams = []; // set columns mode
-//    var columnDefsParams=[{
-//        "targets": [0], // 目标列位置，下标从0开始
-//        "bSearchable": false,
-//        'bSortable': false,
-//        "render": function(data, type, full) { // 返回自定义内容
-//            if(!firstIsnotCheckbox){
-//                return '<div class="checker"><span><input type="checkbox" class="checkboxes" value="'+data+'"/></span></div>';
-//            }
-//        }
-//    }];
+       var columnDefsParams=[{
+           "targets": [0], // 目标列位置，下标从0开始
+           "bSearchable": false,
+           'bSortable': false,
+           "render": function(data, type, full) { // 返回自定义内容
+               if(!firstIsnotCheckbox){
+                   return '<div class="checker"><span><input type="checkbox" class="checkboxes" value="'+data+'"/></span></div>';
+               }
+           }
+       }];
     var addColumnsParams=function(value) {
         columnsParams.push({"data": value});
     }
