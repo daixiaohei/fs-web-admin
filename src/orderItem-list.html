@@ -26,14 +26,14 @@
 <title>订单详情管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单详情管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单详情管理 <span class="c-gray en">&gt;</span> 订单详情列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
   <div class="text-c"> 名称：
     <input type="text" class="input-text" style="width:250px" placeholder="名称" id="name" name="searchName"><button type="button" 
     onclick="doSearch()" class="btn btn-success" id="name" name=""><i class="icon-search"  ></i> 搜索</button>
 
   </div>
-  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加订单" _href="orderItem-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单详情</a></span></div>
+  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加订单详情" _href="orderItem-add.html"  id="orderItem-add-btn" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单详情</a></span></div>
 
   <div id="Search_Result"></div>
   <div id="pageNav" class="pageNav"></div>
@@ -53,7 +53,7 @@
 <script type="text/javascript" src="static/common/datatable_server.js"></script>
 
 <script type="text/javascript">
- /*----------产品管理------------------*/
+ /*----------订单详情管理------------------*/
 function orderItem_add(w,h,title,url){
   layer_show(w,h,title,url);
 }
@@ -67,8 +67,6 @@ function orderItem_edit(title,url,id){
   layer.full(index);
 }
 function orderItem_del(obj,id){
-
- 
    layer.confirm('确认要删除吗？',function(index){
 
         if(index==1){
@@ -87,11 +85,11 @@ function orderItem_del(obj,id){
 
 
 
-    function doSearch (){
+    function doSearch (orderId){
       
-      
+      var orderId = orderId;
        var nameV = $('#name').val();
-       var requestJson = {'name':nameV};
+       var requestJson = {'name':nameV,'orderId':orderId};
         var vals_str = $.param(requestJson);
         
         //初始化表格表格title和对应的值名称
@@ -109,12 +107,10 @@ function orderItem_del(obj,id){
 
     // 对某一行做特殊处理 iDisplayIndex 第几行
     var fnRowCallback= function(nRow, aData, iDisplayIndex) {// 当创建了行，但还未绘制到屏幕上的时候调用
-  
-        var id = aData.id;
-
-
+        var id = aData.id;//编辑要传订单详情id
+        var orderId = aData.orderId;
         var html = '<td class="td-manage">'+
-             '<a title="编辑" href="javascript:;" onclick="orderItem_edit(\'订单编辑\',\'product-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
+             '<a title="编辑" href="javascript:;" onclick="orderItem_edit(\'订单详情编辑\',\'orderItem-add.html?id='+id+'&orderId='+orderId+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6df;</i>'+
              '</a>'+
              '<a title="删除" href="javascript:;" onclick="orderItem_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
@@ -124,16 +120,17 @@ function orderItem_del(obj,id){
         $('td:eq(7)', nRow).html(html);
         return nRow;
     };
-
- 
-
          tableObj = new  initTableDateOnServer('Search_Result',"table1",titleAndcolumns,'/fs-server/orderItem/getOrderItemByPage',vals_str,fnRowCallback,null,null,true,false);
 
     }
 
   window.onload = (function(){
-  
-  doSearch();
+      //页面传过来订单id
+      var orderId = GetQueryString("orderId");
+      $("#orderItem-add-btn").unbind().bind('click',function(){
+         orderItem_edit('订单详情编辑','orderItem-add.html?orderId='+orderId+'','1001');//增加不用传订单详情id
+      });
+      doSearch(orderId);
 
 });
  

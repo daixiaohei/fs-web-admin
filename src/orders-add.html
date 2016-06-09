@@ -23,23 +23,23 @@
 <link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 <link href="lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-<title>添加产品</title>
+<title>添加订单</title>
 
 </head>
 <body>
 <article class="page-container">
   <form class="form form-horizontal"  name='submit_form' id='submit_form' onsubmit="return false">
 
-    <div class="row cl">
+    <div class="row cl" style="display: none">
       <label class="form-label col-xs-4 col-sm-2">订单id：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="id" name="id">
+        <input type="text" class="input-text" value="" placeholder="" id="id" name="id">
       </div>
     </div>
-    <div class="row cl">
+    <div class="row cl" style="display: none">
       <label class="form-label col-xs-4 col-sm-2">订单编号：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="orderNo" name="orderNo">
+        <input type="text" class="input-text" value="" readonly  placeholder="" id="orderNo" name="orderNo">
       </div>
     </div>
     <div class="row cl">
@@ -48,18 +48,28 @@
         <input type="text" class="input-text" value="0" placeholder="" id="amount" name="amount">
       </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">支付类型：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="payType" name="payType">
+
+      <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>支付类型：</label>
+          <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="payType" id="payType" class="select">
+                    <option value="0">现金</option>
+                    <option value="1">支付宝</option>
+                    <option value="2">微信</option>
+                </select>
+				</span>
+          </div>
       </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">支付状态：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="status" name="status">
+      <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>支付状态：</label>
+          <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="status" id="status" class="select">
+                    <option value="0">已支付</option>
+                    <option value="1">待支付</option>
+                </select>
+				</span>
+          </div>
       </div>
-    </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">优惠券码：</label>
       <div class="formControls col-xs-8 col-sm-9">
@@ -84,18 +94,29 @@
         <input type="text" class="input-text" value="0" placeholder="" id="dispatchCost" name="dispatchCost">
       </div>
     </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 下单类型：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="orderType" name="orderType">
+      <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>下单类型：</label>
+          <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="orderType" id="orderType" class="select">
+                    <option value="0">微信下单</option>
+                    <option value="1">pc端下单</option>
+                    <option value="2">到店下单</option>
+                </select>
+				</span>
+          </div>
       </div>
-    </div>
-  <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2"> 配送类型：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="dispatchType" name="dispatchType">
+      <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配送类型：</label>
+          <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="dispatchType" id="dispatchType" class="select">
+                    <option value="0">已经配送</option>
+                    <option value="1">未配送</option>
+                </select>
+				</span>
+          </div>
       </div>
-    </div> <div class="row cl">
+
+      <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2"> 配送地址：</label>
       <div class="formControls col-xs-8 col-sm-9">
         <input type="text" class="input-text" value="0" placeholder="" id="dispatchAddr" name="dispatchAddr">
@@ -114,7 +135,6 @@
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
         <button onClick="addOrders();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-        <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
         <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
     </div>
@@ -144,24 +164,30 @@
    function initOrders(){
        
        var id = GetQueryString("id");
-       
-       alert(id);
        if(id!=null){
-
           var data = getJSON2('/fs-server/orders/getOrdersById',{'id':id});
           if(data!=null)
-            $('#id').val(data.id);
-            $('#orderNo').val(data.orderNo);
-            $('#amount').val(data.amount);
+           $('#id').val(data.id);
+           $('#orderNo').val(data.orderNo);
+           $('#amount').val(data.amount);
+           $('#payType').val(data.payType);
+           $('#status').val(data.status);
+           $('#couponNo').val(data.couponNo);
+           $('#couponAmount').val(data.couponAmount);
+           $('#payAmount').val(data.payAmount);
+           $('#dispatchCost').val(data.dispatchCost);
+           $('#orderType').val(data.orderType);
+           $('#dispatchType').val(data.dispatchType);
+           $('#dispatchAddr').val(data.dispatchAddr);
+           $('#contactUserName').val(data.contactUserName);
+           $('#contractTel').val(data.contractTel);
+
        }
 
     }
     function addOrders(){
 
         var parameters = getSubmitItems("submit_form");
-
-
- 
         $.ajax( {
           type : "post",
           url : '/fs-server/orders/addOrUpdateOrders',

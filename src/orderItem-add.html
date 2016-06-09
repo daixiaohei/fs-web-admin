@@ -31,51 +31,46 @@
   <form class="form form-horizontal"  name='submit_form' id='submit_form' onsubmit="return false">
 
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-2">订单id：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="id" name="id">
-      </div>
-    </div>
-    <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">产品id：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productId" name="productId">
+        <input type="text" class="input-text"  placeholder="" id="productId" name="productId">
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">产品名称：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productName" name="productName">
+        <input type="text" class="input-text"  placeholder="" id="productName" name="productName">
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">产品url：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productUrl" name="productUrl">
+        <input type="text" class="input-text"  placeholder="" id="productUrl" name="productUrl">
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">销售数量：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="sellCount" name="sellCount">
+        <input type="text" class="input-text"  placeholder="" id="sellCount" name="sellCount">
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">产品价格：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productPrice" name="productPrice">
+        <input type="text" class="input-text"  placeholder="" id="productPrice" name="productPrice">
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2"> 销售价格：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="sellPrice" name="sellPrice">
+        <input type="text" class="input-text"  placeholder="" id="sellPrice" name="sellPrice">
       </div>
     </div>
+      <input type="hidden"  id="id" name="id"><!--订单详情id-->
+      <input type="hidden"  id="orderId" name="orderId"><!--订单id-->
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
         <button onClick="addOrderItem();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-        <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
         <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
     </div>
@@ -104,15 +99,19 @@
  function initOrderItem(){//增加订单详情，页面传过来的id是订单id
        
        var id = GetQueryString("id");
-       $('#orderId').val(id);//设置订单id
-       alert(id);
-/*       alert(id);
+       var orderId = GetQueryString("orderId");//在指定的订单下添加详情
+       $("#orderId").val(orderId);
        if(id!=null){
-
           var data = getJSON2('/fs-server/orderItem/getOrderItemById',{'id':id});
           if(data!=null)
-            $('#orders').val(data.id);
-       }*/
+           $('#id').val(data.id);
+           $('#productId').val(data.productId);
+           $('#productName').val(data.productName);
+           $('#productUrl').val(data.productUrl);
+           $('#sellCount').val(data.sellCount);
+           $('#productPrice').val(data.productPrice);
+           $('#sellPrice').val(data.sellPrice);
+       }
 
     }
     function addOrderItem(){

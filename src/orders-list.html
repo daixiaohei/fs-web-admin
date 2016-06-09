@@ -66,9 +66,9 @@ function orders_edit(title,url,id){
   });
   layer.full(index);
 }
-function orders_del(obj,id){
 
- 
+
+function orders_del(obj,id){
    layer.confirm('确认要删除吗？',function(index){
 
         if(index==1){
@@ -111,13 +111,14 @@ function orders_del(obj,id){
             {'title':'配送地址','column':'dispatchAddr','width':'10%'},
             {'title':'联系人','column':'contactUserName','width':'5%'},
             {'title':'联系人电话','column':'contractTel','width':'6%'},
-            {'title':'操作','column':'id','width':'15%'}
+            {'title':'操作','column':'orderId','width':'15%'}
            
            ];
 
     // 对某一行做特殊处理 iDisplayIndex 第几行
     var fnRowCallback= function(nRow, aData, iDisplayIndex) {// 当创建了行，但还未绘制到屏幕上的时候调用
   
+        var orderId = aData.orderId;
         var id = aData.id;
 
 
@@ -127,6 +128,9 @@ function orders_del(obj,id){
              '</a>'+
              '<a title="删除" href="javascript:;" onclick="orders_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6e2;</i>'+
+             '</a>'+
+             '<a title="订单详情列表" href="javascript:;" onclick="orders_edit(\'订单详情\',\'orderItem-list.html?orderId='+orderId+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
+                '<i class="Hui-iconfont">&#xe6df;</i>'+
              '</a>'+
              '</td>'
         $('td:eq(9)', nRow).html(html);
