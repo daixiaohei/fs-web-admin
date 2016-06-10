@@ -30,28 +30,23 @@
 <article class="page-container">
   <form class="form form-horizontal"  name='submit_form' id='submit_form' onsubmit="return false">
 
-    <div class="row cl" style="display:none">
-      <label class="form-label col-xs-4 col-sm-2">id：</label>
-      <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="id" name="id">
-      </div>
-    </div>
+    <input type="hidden"  id="id" name="id">
+
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-2">信息：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="information" name="information">
+        <input type="text" class="input-text"  placeholder="" id="information" name="information">
       </div>
     </div>
-    <div class="row cl" style="display:none">
+    <div class="row cl" >
       <label class="form-label col-xs-4 col-sm-2">产品id：</label>
       <div class="formControls col-xs-8 col-sm-9">
-        <input type="text" class="input-text" value="0" placeholder="" id="productId" name="productId">
+        <input type="text" class="input-text"  placeholder="" id="productId" name="productId" readonly>
       </div>
     </div>
     <div class="row cl">
       <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
         <button onClick="addProductInfo();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-        <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
         <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
       </div>
     </div>
@@ -79,18 +74,23 @@
 <script>
 
     function initProductInfo(){
-       
-       var id = GetQueryString("id");
-       alert(id);
-       if(id!=null){
-           alert(id);
-          var data = getJSON2('/fs-server/productInfo/getProductInfoById',{'id':id});
-          console.log(data);
-          if(data!=null)
-            console.log(data);
-            $('#id').val(data.id);
-            $('#information').val(data.information);
-            $('#productId').val(data.productId);
+        var productId = GetQueryString("productId");
+        $("#productId").val(productId);
+        if(productId!=null){
+        $.ajax( {
+               type : "get",
+               url : '/fs-server/productInfo/getProductInfoByProductId',
+               cache : false,
+               async : false,//同步
+               data : {'productId':productId},
+               success : function(data) {
+                   $('#id').val(data.id);
+                   $('#information').val(data.information);
+                   $('#productId').val(data.productId);
+               },
+               error : function(XMLHttpRequest, textStatus, errorThrown) {
+               }
+           });
        }
 
     }
@@ -132,7 +132,6 @@
     };
 
     jQuery(document).ready(function () {
-alert(2);
         initProductInfo();
 
         $.validator.setDefaults({

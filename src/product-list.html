@@ -26,11 +26,11 @@
 <title>产品管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 产品列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
   <div class="text-c"> 名称：
     <input type="text" class="input-text" style="width:250px" placeholder="名称" id="name" name="searchName"><button type="button" 
-    onclick="doSearch()" class="btn btn-success" id="name" name=""><i class="icon-search"  ></i> 搜索</button>
+    onclick="doSearch()" class="btn btn-success"  ><i class="icon-search"  ></i> 搜索</button>
 
   </div>
   <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加产品" _href="product-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span></div>
@@ -103,7 +103,7 @@ function product_del(obj,id){
             {'title':'所属商家','column':'corpName','width':'15%'},
             {'title':'定价','column':'price','width':'15%'},
             {'title':'所属商家','column':'corpName','width':'15%'},
-            {'title':'星级别','column':'star','width':'15%'},
+            {'title':'星级别','column':'star','width':'10%'},
             {'title':'操作','column':'star','width':'20%'},
            
            ];
@@ -112,6 +112,7 @@ function product_del(obj,id){
     var fnRowCallback= function(nRow, aData, iDisplayIndex) {// 当创建了行，但还未绘制到屏幕上的时候调用
   
         var id = aData.id;
+        var productId = aData.productId;
 
 
         var html = '<td class="td-manage">'+
@@ -121,6 +122,9 @@ function product_del(obj,id){
              '<a title="删除" href="javascript:;" onclick="product_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6e2;</i>'+
              '</a>'+
+             '<a title="详情" href="javascript:;" onclick="product_edit(\'产品详情查看\',\'productInfo-add.html?productId='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
+                '<i class="Hui-iconfont">&#xe6df;</i>'+
+                '</a>'+
              '</td>'
         $('td:eq(8)', nRow).html(html);
         return nRow;

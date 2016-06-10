@@ -28,11 +28,43 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-  <div class="text-c"> 名称：
-    <input type="text" class="input-text" style="width:250px" placeholder="名称" id="name" name="searchName"><button type="button" 
-    onclick="doSearch()" class="btn btn-success" id="name" name=""><i class="icon-search"  ></i> 搜索</button>
+  <div class="text-c">
+      <label>订单编号：</label>
+      <input type="text" class="input-text" style="width:100px" placeholder="订单编号" id="orderNo" name="orderNo">
 
+      <label>支付类型：</label>
+        <span class="select-box inline">
+            <select name="payType" id="payType" class="select">
+                <option value="">全部</option>
+                <option value="0">现金</option>
+                <option value="1">支付宝</option>
+                <option value="2">微信</option>
+            </select>
+        </span>
+      <label>支付状态：</label>
+      <span class="select-box inline">
+      <select name="status" id="status" class="select">
+          <option value="">全部</option>
+          <option value="0">已支付</option>
+          <option value="1">待支付</option>
+      </select>
+      </span>
+      <label>下单状态：</label>
+      <span class="select-box inline">
+        <select name="orderType" id="orderType" class="select">
+            <option value="">全部</option>
+            <option value="0">线上下单</option>
+            <option value="1">线下下单</option>
+        </select>
+      </span>
+
+
+      <button type="button" onclick="doSearch()" class="btn btn-success" >
+          <i class="icon-search"  ></i>
+       搜索
+      </button>
   </div>
+
   <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加订单" _href="orders-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单</a></span></div>
 
   <div id="Search_Result"></div>
@@ -90,8 +122,11 @@ function orders_del(obj,id){
     function doSearch (){
       
       
-       var nameV = $('#name').val();
-       var requestJson = {'name':nameV};
+
+       var statusV = $('#status').val();
+       var payTypeV = $('#payType').val();
+       var orderTypeV = $('#orderType').val();
+       var requestJson = {'status':statusV,'payType':payTypeV,'orderType':orderTypeV};
         var vals_str = $.param(requestJson);
         
         //初始化表格表格title和对应的值名称
@@ -104,7 +139,7 @@ function orders_del(obj,id){
             {'title':'优惠券金额','column':'couponAmount','width':'5%'},
             {'title':'支付金额','column':'payAmount','width':'5%'},
             {'title':'配送价格','column':'dispatchCost','width':'5%'},
-           /* {'title':'订单类型','column':'orderType','width':'4%'},*/
+           {'title':'订单类型','column':'orderType','width':'5%'},
         /*    {'title':'预配送时间','column':'dispatchStart','width':'6%'},*/
          /*   {'title':'预配送结束时间','column':'dispatchEnd','width':'6%'},*/
           /*  {'title':'配送类型','column':'dispatchType','width':'4%'},*/
@@ -120,7 +155,31 @@ function orders_del(obj,id){
   
         var orderId = aData.orderId;
         var id = aData.id;
+        var status = aData.status;
+        var payType = aData.payType;
+        var orderType = aData.orderType;
+        if(status=='0'){
+            var status_html = '<span class="label label-success radius">已支付</span>'
+        }else {
+            var status_html = '<span class="label label-success radius">待支付</span>'
+        }
+        $('td:eq(2)', nRow).html(status_html);
 
+        if(payType=='0'){
+            var payType_html = '<span class="label label-success radius">现金支付</span>'
+        }else if(payType=='1') {
+            var payType_html = '<span class="label label-success radius">支付宝支付</span>'
+        }else if(payType=='2') {
+            var payType_html = '<span class="label label-success radius">微信支付</span>'
+        }
+        $('td:eq(1)', nRow).html(payType_html);
+
+        if(orderType=='0'){
+            var orderType_html = '<span class="label label-success radius">线上下单</span>'
+        }else if(orderType=='1') {
+            var orderType_html = '<span class="label label-success radius">线下下单</span>'
+        }
+        $('td:eq(6)', nRow).html(orderType_html);
 
         var html = '<td class="td-manage">'+
              '<a title="编辑" href="javascript:;" onclick="orders_edit(\'订单编辑\',\'orders-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
@@ -129,11 +188,11 @@ function orders_del(obj,id){
              '<a title="删除" href="javascript:;" onclick="orders_del(this,\'1001\')" class="ml-5" style="text-decoration:none">'+
                '<i class="Hui-iconfont">&#xe6e2;</i>'+
              '</a>'+
-             '<a title="订单详情列表" href="javascript:;" onclick="orders_edit(\'订单详情\',\'orderItem-list.html?orderId='+orderId+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
-                '<i class="Hui-iconfont">&#xe6df;</i>'+
+             '<a title="订单详情" href="javascript:;" onclick="orders_edit(\'订单详情\',\'orderItem-list.html?orderId='+orderId+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
+                '<i class="Hui-iconfont">详情</i>'+
              '</a>'+
              '</td>'
-        $('td:eq(9)', nRow).html(html);
+        $('td:eq(10)', nRow).html(html);
         return nRow;
     };
 
