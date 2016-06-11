@@ -45,8 +45,9 @@
       <span class="select-box inline">
       <select name="status" id="status" class="select">
           <option value="">全部</option>
-          <option value="0">已支付</option>
-          <option value="1">待支付</option>
+          <option value="0">待支付</option>
+          <option value="1">已支付</option>
+          <option value="2">已配送</option>
       </select>
       </span>
       <label>下单状态：</label>
@@ -65,7 +66,15 @@
       </button>
   </div>
 
-  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" data-title="添加订单" _href="orders-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加订单</a></span></div>
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+      <span class="l"> <a class="btn btn-primary radius" data-title="添加订单" _href="orders-add.html" onclick="Hui_admin_tab(this)" href="javascript:;">
+      <i class="Hui-iconfont">&#xe600;</i> 添加订单</a>
+      </span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="r"> <a class="btn btn-primary radius" data-title="配送"  onclick="deliver(this)" href="javascript:;">
+          <i class="Hui-iconfont">&#xe600;</i> 配送</a>
+      </span>
+  </div>
+
 
   <div id="Search_Result"></div>
   <div id="pageNav" class="pageNav"></div>
@@ -116,7 +125,29 @@ function orders_del(obj,id){
     
   });
  }
+function deliver(obj){
 
+    var ids = [];
+    $("input[type='checkbox']:checked").each(function() {
+        ids.push($(this).val());
+    });
+    var idStr = ids.join('-');
+    console.log(idStr);
+    layer.confirm('确认要配送吗？',function(index){
+        if(index==1){
+            var result = getJSON('/fs-server/orders/deliverByIds',{'idStr':idStr});
+            if(result.success='true'){
+                $(obj).parents("tr").remove();
+                layer.msg('已删除!',1);
+            }else{
+                $(obj).parents("tr").remove();
+                layer.msg('删除失败!',2);
+            }
+        }
+
+    });
+
+}
 
 
     function doSearch (){
@@ -131,8 +162,8 @@ function orders_del(obj,id){
         
         //初始化表格表格title和对应的值名称
              var titleAndcolumns=[
-           /* {'title':'ID','column':'id','width':'9%'},*/
-            {'title':'订单编号','column':'orderNo','width':'9%'},
+            {'title':'checkbox','column':'orderId','width':'2%'},
+            {'title':'订单编号','column':'orderNo','width':'12%'},
             {'title':'支付类型','column':'payType','width':'5%'},
             {'title':'订单状态','column':'status','width':'5%'},
          /*   {'title':'优惠券码','column':'couponNo','width':'4%'},*/
@@ -144,7 +175,7 @@ function orders_del(obj,id){
          /*   {'title':'预配送结束时间','column':'dispatchEnd','width':'6%'},*/
           /*  {'title':'配送类型','column':'dispatchType','width':'4%'},*/
             {'title':'配送地址','column':'dispatchAddr','width':'10%'},
-            {'title':'联系人','column':'contactUserName','width':'5%'},
+            {'title':'联系人','column':'contactUserName','width':'8%'},
             {'title':'联系人电话','column':'contractTel','width':'6%'},
             {'title':'操作','column':'orderId','width':'15%'}
            
@@ -158,12 +189,26 @@ function orders_del(obj,id){
         var status = aData.status;
         var payType = aData.payType;
         var orderType = aData.orderType;
+
+  /*      $('.group-checkable').on('click', function(){
+            // Check/uncheck all checkboxes in the table
+            $('input[type="checkbox"]', nRow).prop('checked', this.checked);
+        });
+
+        var ids = [];
+        $("input.checkboxs:checked").each(function() {
+            ids.push($(this).val());
+        });
+        console.log(ids);*/
         if(status=='0'){
-            var status_html = '<span class="label label-success radius">已支付</span>'
-        }else {
             var status_html = '<span class="label label-success radius">待支付</span>'
+        }else if(status=='1') {
+            var status_html = '<span class="label label-success radius">已支付</span>'
+        }else if(status=='2'){
+            var status_html = '<span class="label label-success radius">已配送</span>'
+
         }
-        $('td:eq(2)', nRow).html(status_html);
+        $('td:eq(3)', nRow).html(status_html);
 
         if(payType=='0'){
             var payType_html = '<span class="label label-success radius">现金支付</span>'
@@ -172,14 +217,14 @@ function orders_del(obj,id){
         }else if(payType=='2') {
             var payType_html = '<span class="label label-success radius">微信支付</span>'
         }
-        $('td:eq(1)', nRow).html(payType_html);
+        $('td:eq(2)', nRow).html(payType_html);
 
         if(orderType=='0'){
             var orderType_html = '<span class="label label-success radius">线上下单</span>'
         }else if(orderType=='1') {
             var orderType_html = '<span class="label label-success radius">线下下单</span>'
         }
-        $('td:eq(6)', nRow).html(orderType_html);
+        $('td:eq(7)', nRow).html(orderType_html);
 
         var html = '<td class="td-manage">'+
              '<a title="编辑" href="javascript:;" onclick="orders_edit(\'订单编辑\',\'orders-add.html?id='+id+'\',\'1001\')" class="ml-5" style="text-decoration:none">'+
@@ -192,9 +237,14 @@ function orders_del(obj,id){
                 '<i class="Hui-iconfont">详情</i>'+
              '</a>'+
              '</td>'
-        $('td:eq(10)', nRow).html(html);
+        $('td:eq(11)', nRow).html(html);
         return nRow;
     };
+
+        var fnDrawCallback = function(){
+            //更改每行鼠标显示
+
+        }
 
  
 
